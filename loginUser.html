@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="PT-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Acesso+</title>
+    <link rel="stylesheet" href="css/loginUser.css">
+</head>
+<body>
+        <section class="containerPai">
+
+    <a href="index.html" class="logo-card"><img src="img/logo.png" alt="Logo Acesso+ e Voltar para tela inicial" ></a>
+
+            <div class="card loginActive">
+
+                <div class="esquerda">
+                    <div class="formLogin">
+                        <h2>Fazer Login</h2>
+                        <form action="">
+                            <input type="text" placeholder="Digite seu CPF" required maxlength="11">
+                            <input type="password" placeholder="Digite sua senha" required>
+
+                            <a href="#" class="esqueci-senha">Esqueci minha senha</a>
+
+                            <button type="submit">Entrar</button>
+                        </form>
+                    </div>
+                    <div class="facaLogin">
+                        <h2>Já tem <br> uma conta?</h2>
+                        <p>iJá faz parte do Acesso+? Entre para acessar seus agendamentos e benefícios. </p>
+                        <button class="loginButton">Faça login</button>
+                    </div>
+                </div>
+                <div class="direita">
+                    <div class="formCadastro">
+                        <h2>Cadastro</h2>
+                        <form action="">
+                    <input type="text" placeholder="Digite seu nome completo" required>
+                    <input type="email" placeholder="Digite seu e-mail" required>
+                    <input type="text" name="" id="" required maxlength="11" placeholder="Número de telefone"> 
+                    <input type="text" placeholder="Digite seu CPF" required maxlength="11">
+                    
+                    <div class="campos-duplos">
+                        <input type="number" placeholder="Idade" min="0" required class="input-curto">
+                        <input type="text" placeholder="CEP" required class="input-curto" maxlength="8">
+                    </div>
+
+                    <input type="text" placeholder="Data de nascimento" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
+
+                    <select id="genero" name="genero" required>
+                        <option value="" disabled selected hidden>Selecione seu Gênero</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="nao-binario">Não-binário</option>
+                        <option value="outro">Outro</option>
+                        <option value="prefiro-nao-informar">Prefiro não informar</option>
+                    </select>
+
+                    <select name="est_civil" id="est_civil" required>
+                        <option value="" disabled selected hidden>Selecione seu Estado Civíl</option>
+                        <option value="solteiro(a)">Solteiro(a)</option>
+                        <option value="casado(a)">Casado(a)</option>
+                        <option value="viuvo(a)">Viúvo(a)</option>
+                        <option value="divorciado(a)">Divorciado(a)</option>
+                        <option value="separado(a)">Separado(a) judicialmente</option>
+                    </select>                   
+                    
+                    <input type="password" placeholder="Digite sua senha" required>
+                    <input type="password" placeholder="Confirme sua senha" required>
+                    
+                    <button type="submit">Cadastrar</button>
+                </form>
+                    </div>
+                    <div class="facaCadastro">
+                        <h2>Não tem <br> uma conta?</h2>
+                        <p>Junte-se ao Acesso+ para gerenciar suas consultas, carteirinha e benefícios.</p>
+                        <button class="cadastroButton">Cadastre-se</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="js/loginUser.js"></script>
+</body>
+</html>
