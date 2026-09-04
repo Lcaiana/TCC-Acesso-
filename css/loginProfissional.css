@@ -92,7 +92,7 @@ select:invalid {
     width: 80%;
     height: 90vh;
     background-color: #FFFFFF;
-    box-shadow: 0 10px 30px rgba(56, 0, 176, 0.08); 
+    box-shadow: 0 10px 30px rgba(56, 0, 176, 0.08);
     border: 1px solid #E2E6FA;
     border-radius: 32px;
     padding: 32px 20px;
@@ -106,27 +106,27 @@ select:invalid {
 
 .logo-card {
     position: absolute;
-    top: 28px;                   
-    left: 50%;                   
-    transform: translateX(-50%); 
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 20;                 /* Garante que fique acima de tudo */
     display: inline-block;
-    cursor: pointer;             
+    cursor: pointer;
 }
 
 .logo-card img {
-    height: 48px;                
+    height: 48px;
     width: auto;
     display: block;
     transition: transform 0.2s ease;
 }
 
 .logo-card:hover img {
-    transform: scale(1.05);      
+    transform: scale(1.05);
 }
 
 .esqueci-senha {
-    color: #2668D7;              
+    color: #2668D7;
     font-size: 14px;
     text-decoration: none;
     align-self: flex-end;        /* Alinha o link à direita do input */
@@ -143,17 +143,17 @@ select:invalid {
 .campos-duplos {
     display: flex;
     gap: 10px;
-    width: 360px;               
+    width: 360px;
 }
 
 .input-curto {
     width: 50% !important;      /* Cada um ocupa metade da linha */
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 } /*Remove as setas do input number*/
 
 .formCadastro form {

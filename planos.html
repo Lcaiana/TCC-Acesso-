@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso+ | Planos</title>
+    <link rel="stylesheet" href="css/planos.css">
+</head>
+<body>
+    <nav>
+        <div class="img-logo">
+            <img src="img/logo.png" alt="Logo Acesso+" class="logo-img">
+        </div>
+
+        <div class="links-nav">
+            <a href="index.html">Início</a>
+            <a href="planos.html" class="link-ativo">Planos</a>
+            <a href="beneficios.html">Benefícios</a>
+            <a href="contato.html">Contato</a>
+        </div>
+
+        <button class="btn-nav" onclick="irParaLogin()">Entrar</button>
+    </nav>
+
+    <header class="planos-header">
+        <div class="header-content">
+            <span class="eyebrow">Cobertura para PCD</span>
+            <h1>Nossos planos</h1>
+            <p>Escolha o cuidado ideal para você, com inclusão, autonomia e qualidade de vida.</p>
+        </div>
+    </header>
+
+    <main>
+        <h2>Compare e escolha o seu plano</h2>
+        <p class="planos-introducao">Atendimento acessível, rede qualificada e suporte durante toda a sua jornada.</p>
+
+        <!-- Valores fictícios para demonstração acadêmica do TCC. -->
+        <div class="cards planos-cards">
+            <article class="card-content plano-card" tabindex="0">
+                <img src="img/cuidados-de-saude.png" alt="Ícone de cuidados de saúde" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Essencial</h3>
+                    <p class="preco">R$ 89,90 <span>/ mês</span></p>
+                    <p class="card-description">Para cuidar do que realmente importa no dia a dia.</p>
+                    <hr class="divisor">
+                    <ul class="beneficios">
+                        <li>Consultas clínicas</li>
+                        <li>Rede básica acessível</li>
+                        <li>Carteirinha digital</li>
+                        <li>Suporte por WhatsApp</li>
+                    </ul>
+                    <a href="loginUser.html" class="btn-planos">Assinar Essencial</a>
+                </div>
+            </article>
+
+            <article class="card-content plano-card selecionado" tabindex="0">
+                <img src="img/medico.png" alt="Ícone de profissional de saúde" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Plus</h3>
+                    <p class="preco">R$ 149,90 <span>/ mês</span></p>
+                    <p class="card-description">Mais especialidades e cuidado para acompanhar você.</p>
+                    <hr class="divisor">
+                    <ul class="beneficios">
+                        <li>Tudo do plano Essencial</li>
+                        <li>Consultas com especialistas</li>
+                        <li>Terapias e reabilitação</li>
+                        <li>Agendamento prioritário</li>
+                    </ul>
+                    <a href="loginUser.html" class="btn-planos">Assinar Plus</a>
+                </div>
+            </article>
+
+            <article class="card-content plano-card" tabindex="0">
+                <img src="img/hospital.png" alt="Ícone de hospital" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Premium</h3>
+                    <p class="preco">R$ 229,90 <span>/ mês</span></p>
+                    <p class="card-description">Uma cobertura ampliada para uma jornada mais completa.</p>
+                    <hr class="divisor">
+                    <ul class="beneficios">
+                        <li>Tudo do plano Plus</li>
+                        <li>Rede credenciada ampliada</li>
+                        <li>Acompanhamento multidisciplinar</li>
+                        <li>Check-up anual</li>
+                    </ul>
+                    <a href="loginUser.html" class="btn-planos">Assinar Premium</a>
+                </div>
+            </article>
+        </div>
+
+        <p class="planos-aviso">* Valores fictícios para demonstração acadêmica.</p>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-block">
+                <img src="img/logo.png" alt="Logo Acesso+" class="img-logo-footer">
+                <p>Convênio médico voltado para pessoas com deficiência</p>
+            </div>
+
+            <div class="footer-block">
+                <h4>Institucional</h4>
+                <a href="">Sobre Nós</a>
+                <br>
+                <a href="">Sociedade</a>
+                <br>
+                <a href="">Fale Conosco</a>
+            </div>
+
+            <div class="footer-block">
+                <h4>Ajuda</h4>
+                <a href="">Dúvidas Frequentes</a>
+                <br>
+                <a href="">Política de Privacidade</a>
+                <br>
+                <a href="">Termos de Uso</a>
+            </div>
+
+            <div class="footer-siga">
+                <h4>Siga-nos</h4>
+                <div class="social-icons">
+                    <a href="youtube.com"><img src="img/instagram.png" alt="Instagram" class="footer-img-siganos"></a>
+                    <a href=""><img src="img/facebook.png" alt="Facebook" class="footer-img-siganos"></a>
+                    <a href=""><img src="img/linkedin.png" alt="LinkedIn" class="footer-img-siganos"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/index.js"></script>
+    <script>
+        const planos = document.querySelectorAll(".plano-card");
+
+        planos.forEach((plano) => {
+            plano.addEventListener("click", () => {
+                planos.forEach((item) => item.classList.remove("selecionado"));
+                plano.classList.add("selecionado");
+            });
+
+            plano.addEventListener("keydown", (evento) => {
+                if (evento.key === "Enter" || evento.key === " ") {
+                    evento.preventDefault();
+                    plano.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
