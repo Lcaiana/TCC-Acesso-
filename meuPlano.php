@@ -4,8 +4,31 @@
         header("location: loginUser.html");
         exit();
     }
+    include "conexao.php";
+
     $nomeCompleto = $_SESSION['nome'];
     $primeiroNome = explode(' ', trim($nomeCompleto))[0];
+
+	$IdUsuario = $_SESSION['id'] ?? 0;
+	
+    $comando = "SELECT * FROM Cadastro_Users WHERE Id_User = '$IdUsuario'";
+    $resultado = $con->query($comando);
+    
+    if($resultado && mysqli_num_rows($resultado) > 0) {
+        $dadosUsuario = $resultado->fetch_assoc();
+        $CPF = $dadosUsuario['CPF_User'];
+        $dataNasc = $dadosUsuario['Dta_Nasc_User'];
+        $dataNascFormatada = date("d/m/Y", strtotime($dataNasc));
+        $plano = "Plano Plus"; 
+    } else {
+        $CPF = $_SESSION['CPF'] ?? "00000000000";
+        $dataNascFormatada = "--/--/----";
+        $plano = "Plano Plus";
+    }
+
+	$cpfFormatado = substr($CPF, 0, 3) . "." . substr($CPF, 3, 3) . "." . substr($CPF, 6, 3) . "-" . substr($CPF, 9, 2);
+	$matricula = sprintf('%09d', $IdUsuario);
+    $validade = date("m/Y", strtotime("+1 year"));
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -48,23 +71,27 @@
             <article class="carteirinha">
                 <div class="carteirinha-topo">
                     <span class="carteirinha-marca">Acesso+</span>
-                    <span class="carteirinha-plano">Plano Plus</span>
+                    <span class="carteirinha-plano"><?php echo $plano; ?></span>
                 </div>
                 <div class="carteirinha-info">
                     <p class="carteirinha-rotulo">Titular</p>
-                    <h2 class="carteirinha-nome">Ana Souza</h2>
-                    <div class="carteirinha-dados">
+                    <h2 class="carteirinha-nome"><?php echo htmlspecialchars($nomeCompleto); ?></h2>
+                    <div class="carteirinha-dados" style="flex-wrap: wrap; row-gap: 16px;">
                         <div>
                             <p class="carteirinha-rotulo">CPF</p>
-                            <p class="carteirinha-valor">***.456.789-**</p>
+                            <p class="carteirinha-valor"><?php echo $cpfFormatado; ?></p>
                         </div>
                         <div>
                             <p class="carteirinha-rotulo">Matrícula</p>
-                            <p class="carteirinha-valor">000123456</p>
+                            <p class="carteirinha-valor"><?php echo $matricula; ?></p>
                         </div>
                         <div>
-                            <p class="carteirinha-rotulo">Válida até</p>
-                            <p class="carteirinha-valor">12/2027</p>
+                            <p class="carteirinha-rotulo">Nascimento</p>
+                            <p class="carteirinha-valor"><?php echo $dataNascFormatada; ?></p>
+                        </div>
+                        <div>
+                            <p class="carteirinha-rotulo">Validade</p>
+                            <p class="carteirinha-valor"><?php echo $validade; ?></p>
                         </div>
                     </div>
                 </div>
