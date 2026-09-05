@@ -1,3 +1,14 @@
+<?php
+    session_start();
+    if((!isset($_SESSION['CPF']) == true) AND (!isset($_SESSION['senha']) == true))
+        {
+            unset($_SESSION['CPF']);
+            unset($_SESSION['senha']);
+            header("location: loginUser.html");
+            exit();
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,7 +32,7 @@
 
         <div class="nav-usuario">
             <span class="nav-nome">Ana</span>
-            <a href="index.html" class="btn-nav">Sair</a>
+            <a href="loginUser.html" class="btn-nav">Sair</a>
         </div>
     </nav>
 
