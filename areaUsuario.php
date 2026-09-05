@@ -1,12 +1,20 @@
 <?php
     session_start();
-    if((!isset($_SESSION['CPF']) == true) AND (!isset($_SESSION['senha']) == true))
+    if(!isset($_SESSION['CPF']) || !isset($_SESSION['nome']))
         {
             unset($_SESSION['CPF']);
             unset($_SESSION['senha']);
+            unset($_SESSION['nome']);
             header("location: loginUser.html");
             exit();
         }
+
+    $nomeCompleto = $_SESSION['nome']; //Resgata o nome salvo na session no momento do login
+    $primeiroNome = explode(' ', trim($nomeCompleto))[0]; //pega apenas o primeiro nome da pessoa
+	$CPF = $_SESSION['CPF'];
+	$cpfFormatado = "***." . substr($CPF, 3, 3) . "." . substr($CPF, 6, 3) . "-**";
+	$IdUsuario = $_SESSION['id'] ?? 0;
+	$matricula = sprintf('%09d', $IdUsuario);
 ?>
 
 <!DOCTYPE html>
@@ -24,14 +32,14 @@
         </div>
 
         <div class="links-nav">
-            <a href="areaUsuario.html" class="link-ativo">Início</a>
+            <a href="areaUsuario.php" class="link-ativo">Início</a>
             <a href="meuPlano.html">Meu plano</a>
             <a href="agendamentos.html">Agendamentos</a>
             <a href="redeCredenciada.html">Rede credenciada</a>
         </div>
 
         <div class="nav-usuario">
-            <span class="nav-nome">Ana</span>
+            <span class="nav-nome"><?php echo htmlspecialchars($primeiroNome); ?></span>
             <a href="loginUser.html" class="btn-nav">Sair</a>
         </div>
     </nav>
@@ -39,7 +47,7 @@
     <header class="area-header">
         <div class="header-content">
             <span class="eyebrow">Área do beneficiário</span>
-            <h1>Olá, Ana Souza</h1>
+            <h1>Olá, <?php echo htmlspecialchars($nomeCompleto); ?> </h1>
             <p>Aqui está um resumo do seu plano e dos seus próximos atendimentos.</p>
         </div>
     </header>
@@ -54,15 +62,15 @@
                 </div>
                 <div class="carteirinha-info">
                     <p class="carteirinha-rotulo">Titular</p>
-                    <h2 class="carteirinha-nome">Ana Souza</h2>
+                    <h2 class="carteirinha-nome"><?php echo htmlspecialchars($nomeCompleto); ?></h2>
                     <div class="carteirinha-dados">
                         <div>
                             <p class="carteirinha-rotulo">CPF</p>
-                            <p class="carteirinha-valor">***.456.789-**</p>
+                            <p class="carteirinha-valor"><?php echo $cpfFormatado; ?></p>
                         </div>
                         <div>
                             <p class="carteirinha-rotulo">Matrícula</p>
-                            <p class="carteirinha-valor">000123456</p>
+                            <p class="carteirinha-valor"><?php echo $matricula; ?></p>
                         </div>
                         <div>
                             <p class="carteirinha-rotulo">Válida até</p>
@@ -172,3 +180,4 @@
     </footer>
 </body>
 </html>
+

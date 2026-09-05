@@ -16,6 +16,7 @@
             {
                 unset($_SESSION['CPF']);
                 unset($_SESSION['senha']);
+                unset($_SESSION['nome']);
                 echo "<script>
                     alert('Usuário não encontrado!');
                     window.location.href = 'loginUser.html';
@@ -24,8 +25,15 @@
             }
         else
         {
+            //Extrai os dados do usuário retornados pelo banco
+            $usuario = $resultado->fetch_assoc();
+
+
             $_SESSION['CPF'] = $CPF;
             $_SESSION['senha'] = $senha;
+            $_SESSION['nome'] = $usuario['Nome_User'];
+            $_SESSION['id'] = $usuario['Id_User'];
+            
             header("location: areaUsuario.php");
             exit();
         }
