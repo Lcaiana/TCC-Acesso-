@@ -33,14 +33,14 @@
 
         <div class="links-nav">
             <a href="areaUsuario.php" class="link-ativo">Início</a>
-            <a href="meuPlano.html">Meu plano</a>
-            <a href="agendamentos.html">Agendamentos</a>
-            <a href="redeCredenciada.html">Rede credenciada</a>
+            <a href="meuPlano.php">Meu plano</a>
+            <a href="agendamentos.php">Agendamentos</a>
+            <a href="redeCredenciada.php">Rede credenciada</a>
         </div>
 
         <div class="nav-usuario">
             <span class="nav-nome"><?php echo htmlspecialchars($primeiroNome); ?></span>
-            <a href="loginUser.html" class="btn-nav">Sair</a>
+            <a href="encerrarSessaoUser.php" class="btn-nav">Sair</a>
         </div>
     </nav>
 

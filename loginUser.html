@@ -17,10 +17,10 @@
                     <div class="formLogin">
                         <h2>Fazer Login</h2>
                         <form action="FloginUser.php" method="post">
-                            <input type="text" name="CPF" placeholder="Digite seu CPF" required maxlength="11">
-                            <input type="password" name="senha" placeholder="Digite sua senha" required>
+                            <input type="text" name="CPF" placeholder="Digite seu CPF" aria-label="Digite seu CPF" required maxlength="11">
+                            <input type="password" name="senha" placeholder="Digite sua senha" aria-label="Digite sua senha" required>
 
-                            <a href="#" class="esqueci-senha">Esqueci minha senha</a>
+                            <a href="#" class="esqueci-senha" aria-label="Esqueci minha senha">Esqueci minha senha</a>
 
                             <button type="submit" name="submit">Entrar</button>
                         </form>
@@ -35,19 +35,19 @@
                     <div class="formCadastro">
                         <h2>Cadastro</h2>
                         <form action="FcadastroUser.php" method="post">
-                    <input type="text" name="nome" placeholder="Digite seu nome completo" required>
-                    <input type="email" name="email" placeholder="Digite seu e-mail" required>
-                    <input type="text" name="telefone" id="" required maxlength="11" placeholder="Número de telefone"> 
-                    <input type="text" name="CPF" placeholder="Digite seu CPF" required maxlength="11">
+                    <input type="text" name="nome" placeholder="Digite seu nome completo" aria-label="Digite seu nome completo" required>
+                    <input type="email" name="email" placeholder="Digite seu e-mail" aria-label="Digite seu e-mail" required>
+                    <input type="text" name="telefone" id="" required maxlength="11" placeholder="Número de telefone" aria-label="Número de telefone"> 
+                    <input type="text" name="CPF" placeholder="Digite seu CPF" aria-label="Digite seu CPF" required maxlength="11">
                     
                     <div class="campos-duplos">
-                        <input type="number" name="idade" placeholder="Idade" min="0" required class="input-curto">
-                        <input type="text" name="CEP" placeholder="CEP" required class="input-curto" maxlength="8">
+                        <input type="number" name="idade" placeholder="Idade" aria-label="Idade" min="0" required class="input-curto">
+                        <input type="text" name="CEP" placeholder="CEP" aria-label="CEP" required class="input-curto" maxlength="8">
                     </div>
 
-                    <input type="text" name="data_nasc" placeholder="Data de nascimento" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
+                    <input type="text" name="data_nasc" placeholder="Data de nascimento" aria-label="Data de nascimento" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
 
-                    <select id="genero" name="genero" required>
+                    <select id="genero" name="genero" aria-label="Selecione seu Gênero" required>
                         <option value="" disabled selected hidden>Selecione seu Gênero</option>
                         <option value="feminino">Feminino</option>
                         <option value="masculino">Masculino</option>
@@ -56,8 +56,8 @@
                         <option value="prefiro-nao-informar">Prefiro não informar</option>
                     </select>
 
-                    <select name="est_civil" id="est_civil" required>
-                        <option value="" disabled selected hidden>Selecione seu Estado Civíl</option>
+                    <select name="est_civil" id="est_civil" aria-label="Selecione seu Estado Civil" required>
+                        <option value="" disabled selected hidden>Selecione seu Estado Civil</option>
                         <option value="solteiro(a)">Solteiro(a)</option>
                         <option value="casado(a)">Casado(a)</option>
                         <option value="viuvo(a)">Viúvo(a)</option>
@@ -65,8 +65,8 @@
                         <option value="separado(a)">Separado(a) judicialmente</option>
                     </select>                   
                     
-                    <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
-                    <input type="password" id="conf_senha" placeholder="Confirme sua senha" required>
+                    <input type="password" name="senha" id="senha" placeholder="Digite sua senha" aria-label="Digite sua senha" required>
+                    <input type="password" id="conf_senha" placeholder="Confirme sua senha" aria-label="Confirme sua senha" required>
                     
                     <button type="submit">Cadastrar</button>
                 </form>

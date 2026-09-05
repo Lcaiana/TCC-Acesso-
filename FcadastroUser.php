@@ -13,6 +13,19 @@ $est_civil =$_POST['est_civil'];
 $senha =$_POST['senha'];
 //Após testes passar a senha para hash para criptografar
 
+// Verifica se o CPF ou E-mail já estão cadastrados
+$comandoVerifica = "SELECT * FROM Cadastro_Users WHERE CPF_User='$CPF' OR Email_User='$email'";
+$resultadoVerifica = $con->query($comandoVerifica);
+
+if(mysqli_num_rows($resultadoVerifica) > 0)
+{
+    echo "<script>
+            alert('Erro: Este CPF ou E-mail já está cadastrado em nosso sistema!');
+            window.history.back();
+          </script>";
+    exit();
+}
+
 $comando = "INSERT INTO Cadastro_Users(Nome_User, Dta_Nasc_User, Genero_User, CPF_User, CEP_User, Email_User, Senha_User, Num_Tel_User, Est_Civil_User) 
 VALUES ('$nome','$data_nasc','$genero','$CPF','$CEP','$email','$senha','$telefone','$est_civil')";
 

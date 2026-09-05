@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['CPF']) || !isset($_SESSION['nome'])) {
+        header("location: loginUser.html");
+        exit();
+    }
+    $nomeCompleto = $_SESSION['nome'];
+    $primeiroNome = explode(' ', trim($nomeCompleto))[0];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,15 +22,15 @@
         </div>
 
         <div class="links-nav">
-            <a href="areaUsuario.html">Início</a>
-            <a href="meuPlano.html">Meu plano</a>
-            <a href="agendamentos.html">Agendamentos</a>
-            <a href="redeCredenciada.html" class="link-ativo">Rede credenciada</a>
+            <a href="areaUsuario.php">Início</a>
+            <a href="meuPlano.php">Meu plano</a>
+            <a href="agendamentos.php">Agendamentos</a>
+            <a href="redeCredenciada.php" class="link-ativo">Rede credenciada</a>
         </div>
 
         <div class="nav-usuario">
-            <span class="nav-nome">Ana</span>
-            <a href="index.html" class="btn-nav">Sair</a>
+            <span class="nav-nome"><?php echo htmlspecialchars($primeiroNome); ?></span>
+            <a href="encerrarSessaoUser.php" class="btn-nav">Sair</a>
         </div>
     </nav>
 
