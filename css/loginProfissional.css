@@ -106,7 +106,7 @@ select:invalid {
 
 .logo-card {
     position: absolute;
-    top: 28px;
+    top: 1vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;                 /* Garante que fique acima de tudo */

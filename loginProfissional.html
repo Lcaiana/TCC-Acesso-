@@ -16,13 +16,13 @@
                 <div class="esquerda">
                     <div class="formLogin">
                         <h2>Fazer Login</h2>
-                        <form action="">
-                            <input type="text" placeholder="Digite seu CPF" required maxlength="11">
-                            <input type="password" placeholder="Digite sua senha" required>
+                        <form action="FloginProfissional.php" method="post">
+                            <input type="text" name="CPF" placeholder="Digite seu CPF" aria-label="Digite seu CPF" required maxlength="11">
+                            <input type="password" name="senha" placeholder="Digite sua senha" aria-label="Digite sua senha" required>
 
-                            <a href="#" class="esqueci-senha">Esqueci minha senha</a>
+                            <a href="#" class="esqueci-senha" aria-label="Esqueci minha senha">Esqueci minha senha</a>
 
-                            <button type="submit">Entrar</button>
+                            <button type="submit" name="submit">Entrar</button>
                         </form>
                     </div>
                     <div class="facaLogin">
@@ -34,22 +34,38 @@
                 <div class="direita">
                     <div class="formCadastro">
                         <h2>Cadastro</h2>
-                        <form action="">
-                    <input type="text" placeholder="Digite seu nome completo" required>
-                    <input type="email" placeholder="Digite seu e-mail" required>
-                    <input type="text" name="" id="" required maxlength="11" placeholder="Número de telefone"> 
-                    <input type="text" name="" id="" required placeholder="Digite seu número de registro (CRM,CREFITO,CRP,CRFa,etc.)">
-                    
-                    
+                        <form action="FcadastroProfissional.php" method="post">
+                    <input type="text" name="nome" placeholder="Digite seu nome completo" aria-label="Digite seu nome completo" required>
+                    <input type="email" name="email" placeholder="Digite seu e-mail" aria-label="Digite seu e-mail" required>
+                    <input type="text" name="telefone" required maxlength="11" placeholder="Número de telefone" aria-label="Número de telefone"> 
                     
                     <div class="campos-duplos">
-                        <input type="number" placeholder="Idade" min="0" required class="input-curto">
-                        <input type="text" placeholder="Digite seu CPF" required maxlength="11">
+                        <input type="text" name="registro" required placeholder="Nº Reg. (CRM, etc)" aria-label="Número de registro" class="input-curto">
+                        <select name="uf_registro" aria-label="Estado (UF) do Registro" required class="input-curto">
+                            <option value="" disabled selected hidden>UF do Registro</option>
+                            <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                        </select>
                     </div>
 
-                    <input type="text" placeholder="Data de nascimento" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
+                    <div class="campos-duplos">
+                        <select name="especialidade" aria-label="Selecione sua Especialidade" required class="input-curto">
+                            <option value="" disabled selected hidden>Especialidade</option>
+                            <option value="cardiologia">Cardiologia</option>
+                            <option value="fonoaudiologia">Fonoaudiologia</option>
+                            <option value="fisioterapia">Fisioterapia</option>
+                            <option value="clinica">Clínica Geral</option>
+                            <option value="psicologia">Psicologia</option>
+                            <option value="nutricao">Nutrição</option>
+                        </select>
+                        <input type="text" name="CEP" placeholder="CEP do Consultório" aria-label="CEP do consultório" required maxlength="8" class="input-curto">
+                    </div>
 
-                    <select id="genero" name="genero" required>
+                    <div class="campos-duplos">
+                        <input type="text" name="CPF" placeholder="CPF" aria-label="Digite seu CPF" required maxlength="11" class="input-curto">
+                        <input type="text" name="data_nasc" placeholder="Data Nasc." aria-label="Data de nascimento" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'" class="input-curto" required>
+                    </div>
+
+                    <select id="genero" name="genero" aria-label="Selecione seu Gênero" required>
                         <option value="" disabled selected hidden>Selecione seu Gênero</option>
                         <option value="feminino">Feminino</option>
                         <option value="masculino">Masculino</option>
@@ -58,8 +74,8 @@
                         <option value="prefiro-nao-informar">Prefiro não informar</option>
                     </select>
                     
-                    <input type="password" placeholder="Digite sua senha" required>
-                    <input type="password" placeholder="Confirme sua senha" required>
+                    <input type="password" name="senha" id="senha" placeholder="Digite sua senha" aria-label="Digite sua senha" required>
+                    <input type="password" id="conf_senha" placeholder="Confirme sua senha" aria-label="Confirme sua senha" required>
                     
                     <button type="submit">Cadastrar</button>
                 </form>
