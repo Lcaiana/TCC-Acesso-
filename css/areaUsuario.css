@@ -1,0 +1,625 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+/* ---------- Navegação ---------- */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 8%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo-img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.links-nav {
+    display: flex;
+    gap: 36px;
+}
+
+.links-nav a {
+    color: #475569;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding-bottom: 4px;
+    position: relative;
+}
+
+.links-nav a:hover {
+    color: #2668D7;
+}
+
+.links-nav .link-ativo {
+    color: #0f259e;
+    font-weight: 600;
+}
+
+.links-nav .link-ativo::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #2668D7;
+}
+
+.nav-usuario {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-nome {
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.btn-nav {
+    display: inline-block;
+    background-color: #2668D7;
+    border: 1px solid #2668D7;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-nav:hover {
+    background-color: #0f259e;
+    border-color: #0f259e;
+    color: #ffffff;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.area-header {
+    padding: 48px 8% 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.header-content {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 6px 14px;
+    background-color: #eef2ff;
+    border: 1px solid #dbe4ff;
+    border-radius: 20px;
+    color: #0f259e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.area-header h1 {
+    margin-bottom: 10px;
+    color: #0f172a;
+    font-size: 2.2rem;
+    letter-spacing: -0.02em;
+}
+
+.area-header p {
+    color: #64748b;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* ---------- Conteúdo ---------- */
+
+main {
+    flex: 1;
+    padding: 40px 8% 20px;
+}
+
+.painel {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Carteirinha digital */
+
+.carteirinha {
+    flex: 1;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(160deg, #2668D7 0%, #0f259e 100%);
+    border-radius: 20px;
+    box-shadow: 0 16px 36px rgba(15, 37, 158, 0.28);
+    color: #ffffff;
+    padding: 28px;
+}
+
+.carteirinha-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+.carteirinha-marca {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.carteirinha-plano {
+    padding: 5px 14px;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.carteirinha-info {
+    margin-top: auto;
+}
+
+.carteirinha-rotulo {
+    color: #c9d6ff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.carteirinha-nome {
+    margin-bottom: 22px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.carteirinha-dados {
+    display: flex;
+    gap: 28px;
+}
+
+.carteirinha-valor {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Agendamentos */
+
+.agendamentos {
+    flex: 1.2;
+    min-width: 0;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    padding: 26px 28px;
+}
+
+/* Detalhes do plano */
+
+.detalhes-plano {
+    flex: 1.2;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    padding: 26px 28px;
+}
+
+.detalhes-plano h2 {
+    margin-bottom: 14px;
+    color: #0f172a;
+    font-size: 1.3rem;
+}
+
+.detalhe-linha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.detalhe-linha:last-child {
+    border-bottom: none;
+}
+
+.detalhe-linha strong {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Formulário de novo agendamento */
+
+.novo-agendamento {
+    flex: 1.2;
+    min-width: 0;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    padding: 26px 28px;
+}
+
+.novo-agendamento h2 {
+    margin-bottom: 16px;
+    color: #0f172a;
+    font-size: 1.3rem;
+}
+
+.novo-agendamento form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.novo-agendamento label {
+    color: #475569;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: -8px;
+}
+
+.novo-agendamento input,
+.novo-agendamento select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #D6DBF5;
+    background-color: #F6F7FE;
+    color: #22223B;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.novo-agendamento input:focus,
+.novo-agendamento select:focus {
+    border-color: #2668D7;
+    background-color: #ffffff;
+}
+
+.novo-agendamento button {
+    margin-top: 6px;
+    padding: 13px 20px;
+    background-color: #2668D7;
+    border: 1px solid #2668D7;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.novo-agendamento button:hover {
+    background-color: #0f259e;
+    border-color: #0f259e;
+    transform: none;
+}
+
+.agendamentos h2 {
+    margin-bottom: 18px;
+    color: #0f172a;
+    font-size: 1.3rem;
+}
+
+.agendamento-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.agendamento-item:last-child {
+    border-bottom: none;
+}
+
+.agendamento-icone {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    padding: 8px;
+    background-color: #eef2ff;
+    border-radius: 12px;
+    object-fit: contain;
+}
+
+.agendamento-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.agendamento-info h3 {
+    margin-bottom: 2px;
+    color: #1e293b;
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.agendamento-info p {
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+.status {
+    flex-shrink: 0;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.status.confirmado {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.status.pendente {
+    background-color: #fef9c3;
+    color: #a16207;
+}
+
+/* Acesso rápido */
+
+.acesso-rapido {
+    max-width: 1100px;
+    margin: 40px auto 0;
+}
+
+.acesso-rapido h2 {
+    margin-bottom: 20px;
+    color: #0f172a;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    padding: 10px 0;
+}
+
+.card-content {
+    width: 100%;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    padding: 28px 24px;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-content:hover {
+    transform: translateY(-4px);
+    border-color: #b9cdf3;
+    box-shadow: 0 12px 28px rgba(15, 37, 158, 0.1);
+}
+
+.card-img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+.card-body {
+    width: 100%;
+    text-align: center;
+}
+
+.card-title {
+    margin-bottom: 8px;
+    color: #1e293b;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.card-description {
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.local-distancia {
+    margin-top: 12px;
+    color: #2668D7;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* ---------- Rodapé ---------- */
+
+footer {
+    margin-top: 50px;
+    padding: 35px 25px;
+    background-color: #0f259e;
+}
+
+.footer-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 50px;
+    color: #ffffff;
+}
+
+.footer-block,
+.footer-siga {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-block p {
+    max-width: 400px;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.footer-block a {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.footer-block a:hover {
+    color: #7bbdfc;
+    text-decoration: underline;
+}
+
+.footer-block h4,
+.footer-siga h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.img-logo-footer {
+    height: 40px;
+    width: auto;
+    margin-bottom: 15px;
+    object-fit: contain;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-img-siganos {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.footer-img-siganos:hover {
+    transform: scale(1.15);
+}
+
+@media (max-width: 900px) {
+    .painel {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .carteirinha {
+        width: 100%;
+        max-width: 460px;
+    }
+
+    .agendamentos,
+    .detalhes-plano,
+    .novo-agendamento {
+        width: 100%;
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 14px 5%;
+    }
+
+    .links-nav {
+        gap: 20px;
+    }
+
+    .area-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .footer-content {
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .links-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .nav-usuario {
+        order: 2;
+        margin-left: auto;
+    }
+
+    main {
+        padding-right: 6%;
+        padding-left: 6%;
+    }
+
+    .agendamento-item {
+        flex-wrap: wrap;
+    }
+
+    .status {
+        margin-left: 60px;
+    }
+}
