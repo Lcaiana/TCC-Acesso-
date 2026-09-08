@@ -47,17 +47,19 @@
                         </select>
                     </div>
 
+                    <select name="especialidade" aria-label="Selecione sua Especialidade" required>
+                        <option value="" disabled selected hidden>Especialidade</option>
+                        <option value="cardiologia">Cardiologia</option>
+                        <option value="fonoaudiologia">Fonoaudiologia</option>
+                        <option value="fisioterapia">Fisioterapia</option>
+                        <option value="clinica">Clínica Geral</option>
+                        <option value="psicologia">Psicologia</option>
+                        <option value="nutricao">Nutrição</option>
+                    </select>
+
                     <div class="campos-duplos">
-                        <select name="especialidade" aria-label="Selecione sua Especialidade" required class="input-curto">
-                            <option value="" disabled selected hidden>Especialidade</option>
-                            <option value="cardiologia">Cardiologia</option>
-                            <option value="fonoaudiologia">Fonoaudiologia</option>
-                            <option value="fisioterapia">Fisioterapia</option>
-                            <option value="clinica">Clínica Geral</option>
-                            <option value="psicologia">Psicologia</option>
-                            <option value="nutricao">Nutrição</option>
-                        </select>
                         <input type="text" name="CEP" placeholder="CEP do Consultório" aria-label="CEP do consultório" required maxlength="8" class="input-curto">
+                        <input type="text" name="numero" placeholder="Nº (Ex: 123)" aria-label="Número do consultório" required class="input-curto">
                     </div>
 
                     <div class="campos-duplos">

@@ -41,11 +41,10 @@
                     <input type="text" name="CPF" placeholder="Digite seu CPF" aria-label="Digite seu CPF" required maxlength="11">
                     
                     <div class="campos-duplos">
-                        <input type="number" name="idade" placeholder="Idade" aria-label="Idade" min="0" required class="input-curto">
                         <input type="text" name="CEP" placeholder="CEP" aria-label="CEP" required class="input-curto" maxlength="8">
+                        <input type="text" name="numero" placeholder="Nº (Ex: 123)" aria-label="Número da residência" required class="input-curto">
                     </div>
-
-                    <input type="text" name="data_nasc" placeholder="Data de nascimento" aria-label="Data de nascimento" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
+                    <input type="text" name="data_nasc" placeholder="Data de nascimento" aria-label="Data de nascimento" required onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'">
 
                     <select id="genero" name="genero" aria-label="Selecione seu Gênero" required>
                         <option value="" disabled selected hidden>Selecione seu Gênero</option>
