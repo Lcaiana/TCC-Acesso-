@@ -371,3 +371,83 @@ footer {
 .footer-img-siganos:hover {
     transform: scale(1.15);
 }
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    /* Navegação */
+    nav {
+        flex-wrap: wrap;
+        padding: 15px 5%;
+        gap: 15px;
+    }
+    .links-nav {
+        width: 100%;
+        justify-content: center;
+        order: 3;
+        margin-top: 5px;
+        gap: 20px;
+    }
+    .btn-nav {
+        padding: 8px 16px;
+    }
+
+    /* Header Principal */
+    header {
+        flex-direction: column;
+        padding: 40px 5% 60px;
+        text-align: center;
+        gap: 30px;
+        min-height: auto;
+    }
+    .header-content {
+        max-width: 100%;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-logo {
+        margin: 0 auto 20px;
+    }
+
+    /* Acesso Rápido */
+    .quick-access-container {
+        padding: 0 5%;
+        margin-top: -30px;
+    }
+    .quick-access {
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px 10px;
+    }
+    .qa-item {
+        width: 40%;
+        text-align: center;
+    }
+
+    /* Cards */
+    .cards {
+        padding: 20px 5%;
+    }
+
+    /* Rodapé */
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-block p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .links-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .qa-item {
+        width: 100%;
+    }
+}

@@ -282,3 +282,78 @@ transform: translateX(-50%);
     opacity: 0;
     transition: all .3s 0;
 }
+
+/* Responsividade Mobile */
+@media (max-width: 900px) {
+    html, body {
+        overflow: auto;
+    }
+    .card {
+        width: 95%;
+        height: auto;
+        min-height: 90vh;
+        flex-direction: column;
+        overflow: visible;
+        margin: 20px auto;
+        padding: 50px 15px;
+    }
+    .card::after {
+        display: none;
+    }
+    .esquerda, .direita {
+        width: 100%;
+        height: auto;
+        margin-bottom: 30px;
+    }
+    .facaLogin, .facaCadastro {
+        position: relative;
+        transform: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        margin-bottom: 20px;
+    }
+    .facaLogin h2, .facaCadastro h2, .facaLogin p, .facaCadastro p {
+        color: #22223B;
+    }
+    .facaLogin button, .facaCadastro button {
+        background-color: #2668D7;
+        color: white;
+        border: none;
+    }
+    .formLogin, .formCadastro {
+        position: relative;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        display: none;
+    }
+    .card.loginActive .formLogin {
+        display: flex;
+    }
+    .card.loginActive .formCadastro, .card.loginActive .facaLogin {
+        display: none;
+    }
+    .card.cadastroActive {
+        flex-direction: column-reverse;
+    }
+    .card.cadastroActive .formCadastro {
+        display: flex;
+    }
+    .card.cadastroActive .formLogin, .card.cadastroActive .facaCadastro {
+        display: none;
+    }
+    input, button, select, p {
+        width: 100%;
+        max-width: 400px;
+    }
+    .campos-duplos {
+        width: 100%;
+        max-width: 400px;
+    }
+    h2 {
+        font-size: 36px;
+    }
+    .logo-card {
+        top: -25px;
+    }
+}
