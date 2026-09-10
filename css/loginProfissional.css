@@ -282,3 +282,67 @@ transform: translateX(-50%);
     opacity: 0;
     transition: all .3s 0;
 }
+
+@media (max-width: 768px) {
+    html, body { overflow: auto; height: auto; }
+    
+    .card {
+        width: 95%;
+        height: auto;
+        min-height: 90vh;
+        flex-direction: column;
+        padding: 40px 10px;
+        margin-top: 60px;
+        margin-bottom: 20px;
+        justify-content: flex-start;
+    }
+    
+    /* Zera os containers que antes dividiam a tela */
+    .esquerda, .direita {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Campos sempre fluidos */
+    input, button, select, p, .campos-duplos {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    /* Esconder o fundo azul original que buga */
+    .card::after { display: none !important; }
+
+    /* Transformar as caixas laterais em Banners */
+    .facaLogin, .facaCadastro {
+        position: relative !important;
+        background: linear-gradient(135deg, #2668D7, #3800B0);
+        padding: 30px;
+        border-radius: 20px;
+        margin-top: 30px;
+        transform: none !important;
+        box-sizing: border-box;
+    }
+    
+    .facaLogin h2, .facaCadastro h2, .facaLogin p, .facaCadastro p { color: white; }
+    .facaLogin button, .facaCadastro button { background: white; color: #2668D7; border: none; }
+    
+    h2 { font-size: 32px; text-align: center; }
+    .formCadastro { margin-top: 20px; }
+
+    /* LÓGICA DE EXIBIÇÃO NO CELULAR */
+    /* Quando for a tela de LOGIN */
+    .card.loginActive .formCadastro { display: none !important; }
+    .card.loginActive .facaLogin { display: none !important; }
+    
+    .card.loginActive .formLogin { display: flex !important; opacity: 1 !important; transform: none !important; position: relative !important; }
+    .card.loginActive .facaCadastro { display: flex !important; opacity: 1 !important; transform: none !important; position: relative !important; }
+
+    /* Quando for a tela de CADASTRO */
+    .card.cadastroActive .formLogin { display: none !important; }
+    .card.cadastroActive .facaCadastro { display: none !important; }
+    
+    .card.cadastroActive .formCadastro { display: flex !important; opacity: 1 !important; transform: none !important; position: relative !important; }
+    .card.cadastroActive .facaLogin { display: flex !important; opacity: 1 !important; transform: none !important; position: relative !important; }
+}
