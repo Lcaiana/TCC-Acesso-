@@ -11,7 +11,7 @@
 
 	$IdUsuario = $_SESSION['id'] ?? 0;
 	
-    $comando = "SELECT * FROM Cadastro_Users WHERE Id_User = '$IdUsuario'";
+    $comando = "SELECT u.*, p.Nome_Plano, p.Preco FROM Cadastro_Users u LEFT JOIN Planos p ON u.Id_Plano = p.Id_Plano WHERE u.Id_User = '$IdUsuario'";
     $resultado = $con->query($comando);
     
     if($resultado && mysqli_num_rows($resultado) > 0) {
@@ -19,15 +19,21 @@
         $CPF = $dadosUsuario['CPF_User'];
         $dataNasc = $dadosUsuario['Dta_Nasc_User'];
         $dataNascFormatada = date("d/m/Y", strtotime($dataNasc));
-        $plano = "Plano Plus"; 
+        $plano = $dadosUsuario['Nome_Plano'] ?? "Sem Plano";
+        $preco = $dadosUsuario['Preco'] ?? 0;
+        $status = $dadosUsuario['Status_Pagamento'] ?? "Pendente";
     } else {
         $CPF = $_SESSION['CPF'] ?? "00000000000";
         $dataNascFormatada = "--/--/----";
-        $plano = "Plano Plus";
+        $plano = "Sem Plano";
+        $preco = 0;
+        $status = "Pendente";
     }
 
 	$cpfFormatado = substr($CPF, 0, 3) . "." . substr($CPF, 3, 3) . "." . substr($CPF, 6, 3) . "-" . substr($CPF, 9, 2);
 	$matricula = sprintf('%09d', $IdUsuario);
+    $statusClass = (strtolower($status) == 'ativo') ? 'confirmado' : 'pendente';
+    $precoFormatado = number_format($preco, 2, ',', '.');
     $validade = date("m/Y", strtotime("+1 year"));
 ?>
 <!DOCTYPE html>
@@ -60,7 +66,7 @@
     <header class="area-header">
         <div class="header-content">
             <span class="eyebrow">Meu plano</span>
-            <h1>Plano Plus</h1>
+            <h1>Plano <?php echo htmlspecialchars($plano); ?></h1>
             <p>Confira os detalhes da sua cobertura e os dados da sua carteirinha.</p>
         </div>
     </header>
@@ -102,7 +108,7 @@
 
                 <div class="detalhe-linha">
                     <span>Mensalidade</span>
-                    <strong>R$ 149,90/mês</strong>
+                    <strong>R$ <?php echo $precoFormatado; ?>/mês</strong>
                 </div>
                 <div class="detalhe-linha">
                     <span>Forma de pagamento</span>
@@ -114,7 +120,7 @@
                 </div>
                 <div class="detalhe-linha">
                     <span>Situação</span>
-                    <span class="status confirmado">Ativo</span>
+                    <span class="status <?php echo $statusClass; ?>"><?php echo htmlspecialchars($status); ?></span>
                 </div>
             </section>
         </div>

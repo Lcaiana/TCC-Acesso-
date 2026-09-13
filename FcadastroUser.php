@@ -73,7 +73,15 @@ if (!isset($dadosEndereco['erro']) && !empty($dadosEndereco)) {
     $cidade = $dadosEndereco['localidade'];
 }
 
-$comando = "INSERT INTO Cadastro_Users (Nome_User, Dta_Nasc_User, Genero_User, CPF_User, CEP_User, Numero_User, Rua_User, Bairro_User, Cidade_User, Latitude_User, Longitude_User, Email_User, Senha_User, Num_Tel_User, Est_Civil_User) VALUES ('$nome', '$data_nasc', '$genero', '$CPF', '$CEP', '$numero', '$rua', '$bairro', '$cidade', '$latitude', '$longitude', '$email', '$senha', '$telefone', '$est_civil')";
+// -----------------------------------------------------------
+// NOVO: Coletando o plano
+// -----------------------------------------------------------
+$id_plano = $_POST['id_plano'] ?? 1; // Padrão Essencial se algo falhar
+
+$comando = "INSERT INTO Cadastro_Users 
+    (Nome_User, Dta_Nasc_User, Genero_User, CPF_User, CEP_User, Numero_User, Rua_User, Bairro_User, Cidade_User, Latitude_User, Longitude_User, Email_User, Senha_User, Num_Tel_User, Est_Civil_User, Id_Plano, Status_Pagamento) 
+    VALUES 
+    ('$nome', '$data_nasc', '$genero', '$CPF', '$CEP', '$numero', '$rua', '$bairro', '$cidade', '$latitude', '$longitude', '$email', '$senha', '$telefone', '$est_civil', '$id_plano', 'Pendente')";
 
 $resulta = mysqli_query($con, $comando);
 

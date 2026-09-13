@@ -33,6 +33,7 @@
             $_SESSION['senha'] = $senha;
             $_SESSION['nome'] = $usuario['Nome_User'];
             $_SESSION['id'] = $usuario['Id_User'];
+            $_SESSION['tipo_conta'] = 'paciente'; // NOVO: Define a permissão correta
             
             header("location: areaUsuario.php");
             exit();

@@ -36,3 +36,21 @@ formCadastro.addEventListener('submit' , function(event){
         return
     }
 });
+
+
+// NOVO: Seleciona o plano automaticamente
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const planoId = urlParams.get('plano');
+    if (planoId) {
+        const selectPlano = document.getElementById('id_plano');
+        if (selectPlano) {
+            selectPlano.value = planoId;
+            let card = document.querySelector('.card');
+            if (card) {
+                card.classList.remove('loginActive');
+                card.classList.add('cadastroActive');
+            }
+        }
+    }
+});

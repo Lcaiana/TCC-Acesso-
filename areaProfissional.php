@@ -40,42 +40,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso+ | Portal do Profissional</title>
-    <!-- Reaproveitamos o css do usuario para manter o padrão visual -->
+    <!-- Reaproveitamos o css do usuario para manter o padrão visual da nav -->
     <link rel="stylesheet" href="css/areaUsuario.css">
-    <style>
-        .painel-profissional {
-            padding: 40px 8%;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-        }
-        .resumo-agenda {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-        }
-        .resumo-agenda h2 {
-            color: #0f172a;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        .info-medico {
-            background: #2668D7;
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(38,104,215,0.2);
-        }
-        .info-medico h2 { margin-bottom: 10px; font-size: 1.8rem; }
-        .info-medico p { margin-bottom: 5px; opacity: 0.9; }
-        .btn-logout {
-            color: #ef4444;
-            text-decoration: none;
-            font-weight: 600;
-        }
-    </style>
+    <!-- Novo CSS focado apenas no painel do médico -->
+    <link rel="stylesheet" href="css/areaProfissional.css">
 </head>
 <body>
     <nav>
@@ -91,7 +59,7 @@
 
         <div class="nav-usuario">
             <span class="nav-nome">Dr(a). <?php echo htmlspecialchars($primeiroNome); ?></span>
-            <a href="sair.php" class="btn-logout">Sair</a>
+            <a href="encerrarSessaoProfissional.php" class="btn-logout">Sair</a>
         </div>
     </nav>
 
@@ -110,7 +78,43 @@
 
         <section class="resumo-agenda">
             <h2>Próximas Consultas</h2>
-            <p>Em breve, aqui aparecerá a lista de pacientes agendados com você de forma dinâmica puxando da tabela Consultas!</p>
+            
+            <div class="grid-consultas">
+                <?php
+                // Busca os agendamentos no banco
+                $queryAgenda = "SELECT c.Id_Consulta, c.Data_Consulta, c.Hora_Consulta, c.Status_Consulta, 
+                                       u.Nome_User, u.Num_Tel_User 
+                                FROM Consultas c 
+                                INNER JOIN Cadastro_Users u ON c.Id_User = u.Id_User 
+                                WHERE c.Id_Profissional = '$IdProfissional' 
+                                ORDER BY c.Data_Consulta ASC, c.Hora_Consulta ASC";
+                
+                $resultAgenda = $con->query($queryAgenda);
+
+                if($resultAgenda && mysqli_num_rows($resultAgenda) > 0) {
+                    while($consulta = $resultAgenda->fetch_assoc()) {
+                        $dataFormatada = date("d/m/Y", strtotime($consulta['Data_Consulta']));
+                        $horaFormatada = date("H:i", strtotime($consulta['Hora_Consulta']));
+                        
+                        $statusClass = (strtolower($consulta['Status_Consulta']) == 'pendente') ? 'pendente' : 'confirmado';
+
+                        echo "<div class='card-consulta'>";
+                        echo "    <div class='dados-paciente'>";
+                        echo "        <h3>" . htmlspecialchars($consulta['Nome_User']) . "</h3>";
+                        echo "        <p><strong>Tel:</strong> " . htmlspecialchars($consulta['Num_Tel_User']) . "</p>";
+                        echo "        <span class='status-badge {$statusClass}'>" . htmlspecialchars($consulta['Status_Consulta']) . "</span>";
+                        echo "    </div>";
+                        echo "    <div class='hora-consulta'>";
+                        echo "        <span class='data'>" . $dataFormatada . "</span>";
+                        echo "        <span class='hora'>" . $horaFormatada . "</span>";
+                        echo "    </div>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<p>Você não tem nenhuma consulta agendada no momento.</p>";
+                }
+                ?>
+            </div>
         </section>
     </main>
 </body>

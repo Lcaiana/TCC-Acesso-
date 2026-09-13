@@ -4,8 +4,11 @@
         header("location: loginUser.html");
         exit();
     }
+    include "conexao.php"; // NOVO: Conexão com o banco
+
     $nomeCompleto = $_SESSION['nome'];
     $primeiroNome = explode(' ', trim($nomeCompleto))[0];
+    $IdUsuario = $_SESSION['id']; // NOVO: Pega o ID do usuário da sessão
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -42,64 +45,72 @@
         </div>
     </header>
 
+<?php
+// Buscando os médicos para o formulário
+$comandoProfissionais = "SELECT Id_Profissional, Nome_Profissional, Especialidade_Profissional FROM Cadastro_Profissionais";
+$resultadoProfissionais = $con->query($comandoProfissionais);
+
+// Buscando os agendamentos REAIS do paciente
+$comandoAgendamentos = "SELECT c.*, p.Nome_Profissional, p.Especialidade_Profissional 
+                        FROM Consultas c 
+                        INNER JOIN Cadastro_Profissionais p ON c.Id_Profissional = p.Id_Profissional 
+                        WHERE c.Id_User = '$IdUsuario' 
+                        ORDER BY c.Data_Consulta DESC";
+$resultadoAgendamentos = $con->query($comandoAgendamentos);
+?>
+
     <main>
         <div class="painel">
             <section class="agendamentos">
-                <h2>Próximos agendamentos</h2>
+                <h2>Seus agendamentos</h2>
 
-                <!-- Dados fictícios para demonstração acadêmica do TCC. -->
+                <?php 
+                if($resultadoAgendamentos && mysqli_num_rows($resultadoAgendamentos) > 0) {
+                    while($consulta = $resultadoAgendamentos->fetch_assoc()) {
+                        // Formatar data e hora
+                        $dataFormatada = date("d/m/Y", strtotime($consulta['Data_Consulta']));
+                        $horaFormatada = date("H:i", strtotime($consulta['Hora_Consulta']));
+                        $status = strtolower($consulta['Status_Consulta']);
+                ?>
                 <div class="agendamento-item">
                     <img src="img/medico.png" alt="Ícone de consulta" class="agendamento-icone">
                     <div class="agendamento-info">
-                        <h3>Cardiologia — Dr. Carlos Lima</h3>
-                        <p>15/09/2026 às 09:00</p>
+                        <h3><?php echo htmlspecialchars($consulta['Especialidade_Profissional']); ?> — Dr(a). <?php echo htmlspecialchars($consulta['Nome_Profissional']); ?></h3>
+                        <p><?php echo $dataFormatada; ?> às <?php echo $horaFormatada; ?></p>
                     </div>
-                    <span class="status confirmado">Confirmado</span>
+                    <span class="status <?php echo $status; ?>"><?php echo htmlspecialchars($consulta['Status_Consulta']); ?></span>
                 </div>
-
-                <div class="agendamento-item">
-                    <img src="img/pcd.png" alt="Ícone de fisioterapia" class="agendamento-icone">
-                    <div class="agendamento-info">
-                        <h3>Fisioterapia — Dra. Marina Reis</h3>
-                        <p>22/09/2026 às 14:30</p>
-                    </div>
-                    <span class="status confirmado">Confirmado</span>
-                </div>
-
-                <div class="agendamento-item">
-                    <img src="img/cuidados-de-saude.png" alt="Ícone de consulta clínica" class="agendamento-icone">
-                    <div class="agendamento-info">
-                        <h3>Consulta clínica — Dr. Pedro Alves</h3>
-                        <p>30/09/2026 às 11:00</p>
-                    </div>
-                    <span class="status pendente">Pendente</span>
-                </div>
+                <?php 
+                    }
+                } else {
+                    echo "<p>Você ainda não possui consultas agendadas.</p>";
+                }
+                ?>
             </section>
 
             <section class="novo-agendamento">
                 <h2>Agendar consulta</h2>
 
-                <form action="agendamentos.html">
-                    <label for="especialidade">Especialidade</label>
-                    <select id="especialidade" name="especialidade" required>
-                        <option value="" disabled selected hidden>Selecione a especialidade</option>
-                        <option value="cardiologia">Cardiologia</option>
-                        <option value="fonoaudiologia">Fonoaudiologia</option>
-                        <option value="fisioterapia">Fisioterapia</option>
-                        <option value="clinica">Clínica geral</option>
+                <form action="FfazerAgendamento.php" method="POST">
+                    <label for="id_profissional">Profissional e Especialidade</label>
+                    <select id="id_profissional" name="id_profissional" required>
+                        <option value="" disabled selected hidden>Selecione um profissional</option>
+                        <?php 
+                        if($resultadoProfissionais && mysqli_num_rows($resultadoProfissionais) > 0) {
+                            while($prof = $resultadoProfissionais->fetch_assoc()) {
+                                echo "<option value='".$prof['Id_Profissional']."'>Dr(a). ".$prof['Nome_Profissional']." - ".$prof['Especialidade_Profissional']."</option>";
+                            }
+                        }
+                        ?>
                     </select>
 
                     <label for="data">Data preferida</label>
                     <input type="date" id="data" name="data" required>
 
-                    <label for="periodo">Período</label>
-                    <select id="periodo" name="periodo" required>
-                        <option value="" disabled selected hidden>Selecione o período</option>
-                        <option value="manha">Manhã</option>
-                        <option value="tarde">Tarde</option>
-                    </select>
+                    <label for="hora">Horário preferido (Somente horas cheias)</label>
+                    <input type="time" id="hora" name="hora" required step="3600">
 
-                    <button type="submit">Solicitar agendamento</button>
+                    <button type="submit">Confirmar Agendamento</button>
                 </form>
             </section>
         </div>
