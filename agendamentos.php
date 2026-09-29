@@ -17,6 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso+ | Agendamentos</title>
     <link rel="stylesheet" href="css/areaUsuario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script> <!-- Deixa em português -->
 </head>
 <body>
     <nav>
@@ -105,7 +108,7 @@ $resultadoAgendamentos = $con->query($comandoAgendamentos);
                     </select>
 
                     <label for="data">Data preferida</label>
-                    <input type="date" id="data" name="data" required>
+                    <input type="text" id="data" name="data" placeholder="Selecione uma data" required>
 
                     <label for="hora">Horário preferido (Somente horas cheias)</label>
                     <input type="time" id="hora" name="hora" required step="3600">
@@ -151,5 +154,6 @@ $resultadoAgendamentos = $con->query($comandoAgendamentos);
             </div>
         </div>
     </footer>
+    <script src= "js/agendamento.js" ></script>
 </body>
 </html>

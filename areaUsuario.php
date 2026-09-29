@@ -81,7 +81,7 @@
                 <div class="carteirinha-info">
                     <p class="carteirinha-rotulo">Titular</p>
                     <h2 class="carteirinha-nome"><?php echo htmlspecialchars($nomeCompleto); ?></h2>
-                    <div class="carteirinha-dados" style="flex-wrap: wrap; row-gap: 16px;">
+                    <div class="carteirinha-dados carteirinha-dados-wrap">
                         <div>
                             <p class="carteirinha-rotulo">CPF</p>
                             <p class="carteirinha-valor"><?php echo $cpfFormatado; ?></p>

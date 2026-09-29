@@ -33,37 +33,7 @@
     <title>Acesso+ | Prontuários</title>
     <link rel="stylesheet" href="css/areaUsuario.css">
     <link rel="stylesheet" href="css/areaProfissional.css">
-    <style>
-        .prontuario-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .form-prontuario textarea {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            resize: vertical;
-        }
-        .btn-salvar {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .btn-salvar:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="css/prontuario.css">
 </head>
 <body>
     <nav>
@@ -81,26 +51,27 @@
         </div>
     </nav>
 
-    <main class="painel-profissional" style="display: block; margin-top: 40px;">
+    <main class="painel-profissional painel-prontuario">
         <div class="prontuario-container">
-            <h2>Prontuários Pendentes</h2>
-            <p>Selecione uma consulta para preencher as anotações e marcá-la como realizada.</p>
-            
             <?php
-            // Busca apenas consultas pendentes (ou seja, as que precisam de prontuário)
-            $query = "SELECT c.Id_Consulta, c.Data_Consulta, c.Hora_Consulta, u.Nome_User, u.CPF_User 
-                      FROM Consultas c 
-                      INNER JOIN Cadastro_Users u ON c.Id_User = u.Id_User 
-                      WHERE c.Id_Profissional = '$IdProfissional' AND c.Status_Consulta = 'Pendente'
-                      ORDER BY c.Data_Consulta ASC";
-            
-            $result = $con->query($query);
-            
-            if($result && mysqli_num_rows($result) > 0) {
-                while($row = $result->fetch_assoc()) {
+            if (isset($_GET['id_consulta'])) {
+                $idConsultaSelecionada = $_GET['id_consulta'];
+                // Busca apenas a consulta selecionada
+                $query = "SELECT c.Id_Consulta, c.Data_Consulta, c.Hora_Consulta, u.Nome_User, u.CPF_User 
+                          FROM Consultas c 
+                          INNER JOIN Cadastro_Users u ON c.Id_User = u.Id_User 
+                          WHERE c.Id_Profissional = '$IdProfissional' AND c.Id_Consulta = '$idConsultaSelecionada' AND c.Status_Consulta = 'Pendente'";
+                
+                $result = $con->query($query);
+                
+                if($result && mysqli_num_rows($result) > 0) {
+                    $row = $result->fetch_assoc();
                     $dataFormatada = date("d/m/Y", strtotime($row['Data_Consulta']));
                     $horaFormatada = date("H:i", strtotime($row['Hora_Consulta']));
                     ?>
+                    <h2>Preencher Prontuário</h2>
+                    <p><a href="prontuario.php" style="color: #007bff; text-decoration: none;">&larr; Voltar para a lista de consultas</a></p>
+                    
                     <div style="border: 1px solid #eee; padding: 15px; margin-top: 15px; border-radius: 5px;">
                         <h3>Paciente: <?php echo htmlspecialchars($row['Nome_User']); ?></h3>
                         <p><strong>Data:</strong> <?php echo $dataFormatada; ?> às <?php echo $horaFormatada; ?> | <strong>CPF:</strong> <?php echo $row['CPF_User']; ?></p>
@@ -114,9 +85,44 @@
                         </form>
                     </div>
                     <?php
+                } else {
+                    echo "<p>Consulta não encontrada ou já finalizada.</p>";
+                    echo '<p><a href="prontuario.php" style="color: #007bff; text-decoration: none;">&larr; Voltar</a></p>';
                 }
             } else {
-                echo "<p>Nenhuma consulta pendente de prontuário.</p>";
+                // Se não houver id_consulta na URL, lista todas as consultas pendentes
+            ?>
+                <h2>Consultas Pendentes</h2>
+                <p>Selecione uma consulta para preencher as anotações e marcá-la como realizada.</p>
+                
+                <?php
+                $query = "SELECT c.Id_Consulta, c.Data_Consulta, c.Hora_Consulta, u.Nome_User, u.CPF_User 
+                          FROM Consultas c 
+                          INNER JOIN Cadastro_Users u ON c.Id_User = u.Id_User 
+                          WHERE c.Id_Profissional = '$IdProfissional' AND c.Status_Consulta = 'Pendente'
+                          ORDER BY c.Data_Consulta ASC";
+                
+                $result = $con->query($query);
+                
+                if($result && mysqli_num_rows($result) > 0) {
+                    echo '<div class="cards-container">';
+                    while($row = $result->fetch_assoc()) {
+                        $dataFormatada = date("d/m/Y", strtotime($row['Data_Consulta']));
+                        $horaFormatada = date("H:i", strtotime($row['Hora_Consulta']));
+                        
+                        echo '<div class="card-paciente">';
+                        echo '<div>';
+                        echo '<h3>' . htmlspecialchars($row['Nome_User']) . '</h3>';
+                        echo '<p><strong>Data:</strong> ' . $dataFormatada . '</p>';
+                        echo '<p><strong>Hora:</strong> ' . $horaFormatada . '</p>';
+                        echo '</div>';
+                        echo '<a href="prontuario.php?id_consulta=' . $row['Id_Consulta'] . '" class="btn-atender">Atender</a>';
+                        echo '</div>';
+                    }
+                    echo '</div>';
+                } else {
+                    echo "<p>Nenhuma consulta pendente de prontuário.</p>";
+                }
             }
             ?>
         </div>

@@ -40,9 +40,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso+ | Portal do Profissional</title>
-    <!-- Reaproveitamos o css do usuario para manter o padrão visual da nav -->
     <link rel="stylesheet" href="css/areaUsuario.css">
-    <!-- Novo CSS focado apenas no painel do médico -->
     <link rel="stylesheet" href="css/areaProfissional.css">
 </head>
 <body>
@@ -54,7 +52,7 @@
         <div class="links-nav">
             <a href="areaProfissional.php" class="link-ativo">Portal do Médico</a>
             <a href="#">Minha Agenda</a>
-            <a href="#">Prontuários</a>
+            <a href="prontuario.php">Prontuários</a>
         </div>
 
         <div class="nav-usuario">

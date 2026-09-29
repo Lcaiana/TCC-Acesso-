@@ -43,11 +43,11 @@
     </header>
 
     <main>
-        <section class="acesso-rapido" style="margin-top: 0;">
+        <section class="acesso-rapido mt-0">
             <h2>Mapa da Rede Credenciada</h2>
 
             <!-- Div onde o Google Maps será renderizado -->
-            <div id="map" style="width: 100%; height: 500px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
+            <div id="map" class="map-container"></div>
 
             <?php
             // Busca todos os profissionais cadastrados que possuem Latitude e Longitude
@@ -107,9 +107,9 @@
                         marker.addListener("click", () => {
                             const conteudoBalao = `
                                 <div>
-                                    <h3 style="color:#333; margin-bottom:5px;">${medico.Nome_Profissional}</h3>
-                                    <p style="margin:0;"><strong>Especialidade:</strong> ${medico.Especialidade_Profissional}</p>
-                                    <p style="margin:0;"><strong>Endereço:</strong> ${medico.Rua_Profissional}, ${medico.Numero_Profissional}</p>
+                                    <h3 class="info-window-title">${medico.Nome_Profissional}</h3>
+                                    <p class="info-window-text"><strong>Especialidade:</strong> ${medico.Especialidade_Profissional}</p>
+                                    <p class="info-window-text"><strong>Endereço:</strong> ${medico.Rua_Profissional}, ${medico.Numero_Profissional}</p>
                                 </div>
                             `;
                             infoWindow.setContent(conteudoBalao);

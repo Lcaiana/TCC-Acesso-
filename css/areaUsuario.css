@@ -623,3 +623,10 @@ footer {
         margin-left: 60px;
     }
 }
+
+.carteirinha-dados-wrap { flex-wrap: wrap; row-gap: 16px; }
+
+.mt-0 { margin-top: 0; }
+.map-container { width: 100%; height: 500px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.info-window-title { color: #333; margin-bottom: 5px; }
+.info-window-text { margin: 0; }
