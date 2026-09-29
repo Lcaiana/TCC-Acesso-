@@ -1,0 +1,125 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['CPF']) || !isset($_SESSION['nome']) || !isset($_SESSION['tipo_conta']) || $_SESSION['tipo_conta'] != 'profissional')
+    {
+        header("location: loginProfissional.html");
+        exit();
+    }
+
+    $nomeCompleto = $_SESSION['nome'];
+    $primeiroNome = explode(' ', trim($nomeCompleto))[0];
+    include "conexao.php";
+
+	$IdProfissional = $_SESSION['id'] ?? 0;
+    
+    // Verifica se enviou o formulário de prontuário
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_consulta'])) {
+        $idConsulta = $_POST['id_consulta'];
+        $observacoes = $_POST['observacoes'];
+        
+        // Atualiza a consulta para Realizada e salva as observações (Certifique-se de criar a coluna Observacoes_Medico na tabela Consultas)
+        $comandoAtualiza = "UPDATE Consultas SET Status_Consulta = 'Realizada', Observacoes_Medico = '$observacoes' WHERE Id_Consulta = '$idConsulta' AND Id_Profissional = '$IdProfissional'";
+        $con->query($comandoAtualiza);
+        
+        echo "<script>alert('Prontuário salvo e consulta finalizada com sucesso!'); window.location.href='prontuario.php';</script>";
+        exit();
+    }
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso+ | Prontuários</title>
+    <link rel="stylesheet" href="css/areaUsuario.css">
+    <link rel="stylesheet" href="css/areaProfissional.css">
+    <style>
+        .prontuario-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .form-prontuario textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+        .btn-salvar {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-salvar:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="img-logo">
+            <img src="img/logo.png" alt="Logo Acesso+" class="logo-img">
+        </div>
+        <div class="links-nav">
+            <a href="areaProfissional.php">Portal do Médico</a>
+            <a href="areaProfissional.php">Minha Agenda</a>
+            <a href="prontuario.php" class="link-ativo">Prontuários</a>
+        </div>
+        <div class="nav-usuario">
+            <span class="nav-nome">Dr(a). <?php echo htmlspecialchars($primeiroNome); ?></span>
+            <a href="encerrarSessaoProfissional.php" class="btn-logout">Sair</a>
+        </div>
+    </nav>
+
+    <main class="painel-profissional" style="display: block; margin-top: 40px;">
+        <div class="prontuario-container">
+            <h2>Prontuários Pendentes</h2>
+            <p>Selecione uma consulta para preencher as anotações e marcá-la como realizada.</p>
+            
+            <?php
+            // Busca apenas consultas pendentes (ou seja, as que precisam de prontuário)
+            $query = "SELECT c.Id_Consulta, c.Data_Consulta, c.Hora_Consulta, u.Nome_User, u.CPF_User 
+                      FROM Consultas c 
+                      INNER JOIN Cadastro_Users u ON c.Id_User = u.Id_User 
+                      WHERE c.Id_Profissional = '$IdProfissional' AND c.Status_Consulta = 'Pendente'
+                      ORDER BY c.Data_Consulta ASC";
+            
+            $result = $con->query($query);
+            
+            if($result && mysqli_num_rows($result) > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $dataFormatada = date("d/m/Y", strtotime($row['Data_Consulta']));
+                    $horaFormatada = date("H:i", strtotime($row['Hora_Consulta']));
+                    ?>
+                    <div style="border: 1px solid #eee; padding: 15px; margin-top: 15px; border-radius: 5px;">
+                        <h3>Paciente: <?php echo htmlspecialchars($row['Nome_User']); ?></h3>
+                        <p><strong>Data:</strong> <?php echo $dataFormatada; ?> às <?php echo $horaFormatada; ?> | <strong>CPF:</strong> <?php echo $row['CPF_User']; ?></p>
+                        
+                        <form method="POST" action="prontuario.php" class="form-prontuario">
+                            <input type="hidden" name="id_consulta" value="<?php echo $row['Id_Consulta']; ?>">
+                            <label for="obs_<?php echo $row['Id_Consulta']; ?>">Anotações da Consulta (Prontuário):</label>
+                            <textarea id="obs_<?php echo $row['Id_Consulta']; ?>" name="observacoes" placeholder="Digite as observações, sintomas, receituário, etc..." required></textarea>
+                            <br>
+                            <button type="submit" class="btn-salvar">Salvar e Finalizar Consulta</button>
+                        </form>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<p>Nenhuma consulta pendente de prontuário.</p>";
+            }
+            ?>
+        </div>
+    </main>
+</body>
+</html>

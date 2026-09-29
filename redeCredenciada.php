@@ -44,46 +44,82 @@
 
     <main>
         <section class="acesso-rapido" style="margin-top: 0;">
-            <h2>Clínicas e consultórios</h2>
+            <h2>Mapa da Rede Credenciada</h2>
 
-            <!-- Dados fictícios para demonstração acadêmica do TCC. -->
-            <div class="cards">
-                <div class="card-content">
-                    <img src="img/hospital.png" alt="Ícone de hospital" class="card-img">
-                    <div class="card-body">
-                        <h3 class="card-title">Clínica Vida Acessível</h3>
-                        <p class="card-description">Clínica geral e cardiologia. Rampas, elevador adaptado e recepção em libras.</p>
-                        <p class="local-distancia">Centro — 2,4 km</p>
-                    </div>
-                </div>
+            <!-- Div onde o Google Maps será renderizado -->
+            <div id="map" style="width: 100%; height: 500px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
 
-                <div class="card-content">
-                    <img src="img/medico.png" alt="Ícone de profissional de saúde" class="card-img">
-                    <div class="card-body">
-                        <h3 class="card-title">Instituto Mover Reabilitação</h3>
-                        <p class="card-description">Fisioterapia, fonoaudiologia e terapia ocupacional com equipe especializada em PCD.</p>
-                        <p class="local-distancia">Jardim América — 4,1 km</p>
-                    </div>
-                </div>
+            <?php
+            // Busca todos os profissionais cadastrados que possuem Latitude e Longitude
+            include "conexao.php";
+            $queryMedicos = "SELECT Nome_Profissional, Especialidade_Profissional, Rua_Profissional, Numero_Profissional, Latitude_Profissional, Longitude_Profissional FROM Cadastro_Profissionais WHERE Latitude_Profissional IS NOT NULL AND Longitude_Profissional IS NOT NULL";
+            $resultadoMedicos = $con->query($queryMedicos);
+            
+            $medicosArray = [];
+            if($resultadoMedicos && mysqli_num_rows($resultadoMedicos) > 0) {
+                while($row = $resultadoMedicos->fetch_assoc()) {
+                    $medicosArray[] = $row;
+                }
+            }
+            ?>
 
-                <div class="card-content">
-                    <img src="img/cuidados-de-saude.png" alt="Ícone de cuidados de saúde" class="card-img">
-                    <div class="card-body">
-                        <h3 class="card-title">Centro de Especialidades Bem Viver</h3>
-                        <p class="card-description">Neurologia, ortopedia e psicologia. Estacionamento com vagas reservadas.</p>
-                        <p class="local-distancia">Vila Nova — 5,8 km</p>
-                    </div>
-                </div>
+            <script>
+                // Passa os dados do PHP (Banco de Dados) para o JavaScript
+                const locaisMedicos = <?php echo json_encode($medicosArray); ?>;
 
-                <div class="card-content">
-                    <img src="img/hospital.png" alt="Ícone de hospital" class="card-img">
-                    <div class="card-body">
-                        <h3 class="card-title">Hospital São Rafael</h3>
-                        <p class="card-description">Pronto atendimento 24h e exames de imagem com acessibilidade completa.</p>
-                        <p class="local-distancia">Região Central — 6,3 km</p>
-                    </div>
-                </div>
-            </div>
+                function initMap() {
+                    // Posição central padrão (ex: Centro do Brasil ou São Paulo)
+                    // Se houver médicos, centraliza no primeiro. Se não, usa um padrão.
+                    let centroMap = { lat: -23.5505, lng: -46.6333 }; // SP padrão
+                    
+                    if(locaisMedicos.length > 0) {
+                        centroMap = { 
+                            lat: parseFloat(locaisMedicos[0].Latitude_Profissional), 
+                            lng: parseFloat(locaisMedicos[0].Longitude_Profissional) 
+                        };
+                    }
+
+                    // Cria o mapa no HTML
+                    const map = new google.maps.Map(document.getElementById("map"), {
+                        zoom: 12,
+                        center: centroMap,
+                        mapTypeId: "roadmap"
+                    });
+
+                    // Cria o InfoWindow (o balãozinho que abre ao clicar no pino)
+                    const infoWindow = new google.maps.InfoWindow();
+
+                    // Faz um laço de repetição para colocar um pino para cada médico
+                    locaisMedicos.forEach((medico) => {
+                        const posicao = {
+                            lat: parseFloat(medico.Latitude_Profissional),
+                            lng: parseFloat(medico.Longitude_Profissional)
+                        };
+
+                        const marker = new google.maps.Marker({
+                            position: posicao,
+                            map: map,
+                            title: medico.Nome_Profissional,
+                            animation: google.maps.Animation.DROP
+                        });
+
+                        // Quando o usuário clicar no pino, mostra as informações
+                        marker.addListener("click", () => {
+                            const conteudoBalao = `
+                                <div>
+                                    <h3 style="color:#333; margin-bottom:5px;">${medico.Nome_Profissional}</h3>
+                                    <p style="margin:0;"><strong>Especialidade:</strong> ${medico.Especialidade_Profissional}</p>
+                                    <p style="margin:0;"><strong>Endereço:</strong> ${medico.Rua_Profissional}, ${medico.Numero_Profissional}</p>
+                                </div>
+                            `;
+                            infoWindow.setContent(conteudoBalao);
+                            infoWindow.open(map, marker);
+                        });
+                    });
+                }
+            </script>
+            <!-- Carrega a API do Google Maps usando a chave que está no conexao.php -->
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo $google_maps_api_key; ?>&callback=initMap"></script>
         </section>
     </main>
 

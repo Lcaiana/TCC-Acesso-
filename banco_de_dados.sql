@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS Consultas (
     Data_Consulta DATE NOT NULL,
     Hora_Consulta TIME NOT NULL, 
     Status_Consulta VARCHAR(50) DEFAULT 'Pendente',
+    Observacoes_Medico TEXT,
     Data_Criacao_Consulta TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Registra exatamente quando a consulta foi marcada
     
     -- Relações: Agendamento pertence a um usuário e a um profissional
