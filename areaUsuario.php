@@ -44,23 +44,7 @@
     <link rel="stylesheet" href="css/areaUsuario.css">
 </head>
 <body>
-    <nav>
-        <div class="img-logo">
-            <img src="img/logo.png" alt="Logo Acesso+" class="logo-img">
-        </div>
-
-        <div class="links-nav">
-            <a href="areaUsuario.php" class="link-ativo">Início</a>
-            <a href="meuPlano.php">Meu plano</a>
-            <a href="agendamentos.php">Agendamentos</a>
-            <a href="redeCredenciada.php">Rede credenciada</a>
-        </div>
-
-        <div class="nav-usuario">
-            <span class="nav-nome"><?php echo htmlspecialchars($primeiroNome); ?></span>
-            <a href="encerrarSessaoUser.php" class="btn-nav">Sair</a>
-        </div>
-    </nav>
+    <?php include 'menuUsuario.php'; ?>
 
     <header class="area-header">
         <div class="header-content">
@@ -165,40 +149,8 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-block">
-                <img src="img/logo.png" alt="Logo Acesso+" class="img-logo-footer">
-                <p>Convênio médico voltado para pessoas com deficiência</p>
-            </div>
-
-            <div class="footer-block">
-                <h4>Institucional</h4>
-                <a href="">Sobre Nós</a>
-                <br>
-                <a href="">Sociedade</a>
-                <br>
-                <a href="">Fale Conosco</a>
-            </div>
-
-            <div class="footer-block">
-                <h4>Ajuda</h4>
-                <a href="">Dúvidas Frequentes</a>
-                <br>
-                <a href="">Política de Privacidade</a>
-                <br>
-                <a href="">Termos de Uso</a>
-            </div>
-
-            <div class="footer-siga">
-                <h4>Siga-nos</h4>
-                <div class="social-icons">
-                    <a href="youtube.com"><img src="img/instagram.png" alt="Instagram" class="footer-img-siganos"></a>
-                    <a href=""><img src="img/facebook.png" alt="Facebook" class="footer-img-siganos"></a>
-                    <a href=""><img src="img/linkedin.png" alt="LinkedIn" class="footer-img-siganos"></a>
-                </div>
-            </div>
-        </div>
+    <footer style="text-align: center; padding: 20px; margin-top: 40px; color: #64748b; font-size: 0.85rem; border-top: 1px solid #e2e8f0;">
+        <p>© 2026 Acesso+ | Painel do Beneficiário</p>
     </footer>
 </body>
 </html>

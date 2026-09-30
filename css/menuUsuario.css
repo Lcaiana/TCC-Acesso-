@@ -1,0 +1,212 @@
+/* ---------- Navegação e Acessibilidade ---------- */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 8%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo-img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.links-nav {
+    display: flex;
+    gap: 36px;
+}
+
+.links-nav a {
+    color: #475569;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding-bottom: 4px;
+    position: relative;
+}
+
+.links-nav a:hover {
+    color: #2668D7;
+}
+
+.links-nav .link-ativo {
+    color: #0f259e;
+    font-weight: 600;
+}
+
+.links-nav .link-ativo::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #2668D7;
+}
+
+.nav-usuario {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-nome {
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.btn-nav {
+    display: inline-block;
+    background-color: #2668D7;
+    border: 1px solid #2668D7;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-nav:hover {
+    background-color: #0f259e;
+    border-color: #0f259e;
+    color: #ffffff;
+}
+
+/* ---------- Botões de Acessibilidade ---------- */
+
+.acessibilidade-botoes {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-acessibilidade {
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.btn-acessibilidade:hover {
+    background-color: #2668D7;
+    color: #ffffff;
+    border-color: #2668D7;
+}
+
+.btn-acessibilidade.icone {
+    font-size: 18px;
+}
+
+/* ---------- Alto Contraste ---------- */
+body.alto-contraste {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+body.alto-contraste nav,
+body.alto-contraste .area-header,
+body.alto-contraste footer,
+body.alto-contraste .card-content,
+body.alto-contraste .painel,
+body.alto-contraste .carteirinha,
+body.alto-contraste .agendamentos,
+body.alto-contraste .detalhes-plano,
+body.alto-contraste .novo-agendamento {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: #333 !important;
+}
+
+body.alto-contraste h1, 
+body.alto-contraste h2, 
+body.alto-contraste h3, 
+body.alto-contraste p, 
+body.alto-contraste span, 
+body.alto-contraste a,
+body.alto-contraste label {
+    color: #ffffff !important;
+}
+
+body.alto-contraste .eyebrow,
+body.alto-contraste .status {
+    background: #333 !important;
+    border-color: #555 !important;
+}
+
+body.alto-contraste input,
+body.alto-contraste select,
+body.alto-contraste textarea {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #444 !important;
+}
+
+/* Força o calendário Flatpickr a ficar escuro no modo alto contraste */
+body.alto-contraste .flatpickr-calendar {
+    background: #1e1e1e !important;
+    border: 1px solid #444 !important;
+    box-shadow: none !important;
+}
+body.alto-contraste .flatpickr-day,
+body.alto-contraste .flatpickr-weekday,
+body.alto-contraste .flatpickr-current-month span {
+    color: #ffffff !important;
+}
+body.alto-contraste .flatpickr-day:hover,
+body.alto-contraste .flatpickr-day:focus {
+    background: #333 !important;
+}
+body.alto-contraste .flatpickr-day.selected {
+    background: #2668D7 !important;
+    color: #ffffff !important;
+}
+
+/* Ajustes Responsivos da Nav */
+@media (max-width: 768px) {
+    nav {
+        padding: 14px 5%;
+    }
+    .links-nav {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .links-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 16px;
+    }
+    .nav-usuario {
+        order: 2;
+        margin-left: auto;
+    }
+    .acessibilidade-botoes {
+        order: 1;
+        width: 100%;
+        justify-content: center;
+    }
+}
