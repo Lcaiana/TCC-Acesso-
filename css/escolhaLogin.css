@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: #eef2ff; /* Mantém a mesma cor de fundo das outras telas */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-card {
+    position: absolute;
+    top: 28px;                   
+    left: 50%;                   
+    transform: translateX(-50%); 
+    z-index: 20;                 /* Garante que fique acima de tudo */
+    display: inline-block;
+    cursor: pointer;             
+}
+
+.logo-card img {
+    height: 48px;                
+    width: auto;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.logo-card:hover img {
+    transform: scale(1.05);      
+}
+
+main {
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px 20px;
+}
+
+h1 {
+    margin-bottom: 40px;
+    color: #22223B; /* Cor escura padrão da tipografia do seu sistema */
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px; /* Ajustado de 10vw para um espaçamento mais proporcional */
+    padding: 10px;
+}
+
+/* Removido sublinhado e estilos padrões da tag <a> */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-content {
+    width: 250px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(56, 0, 176, 0.08); /* Mesma sombra usada nos inputs/cards */
+    border: 1px solid #e2e6fa;
+    padding: 24px 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efeito Hover suave */
+.card-content:hover {
+    transform: translateY(-6px);
+    border-color: #5b86e5;
+    box-shadow: 0 14px 35px rgba(91, 134, 229, 0.18);
+}
+
+.card-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #22223B;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: #8c93b0; /* Mesma cor usada nos placeholders */
+    line-height: 1.4;
+}
