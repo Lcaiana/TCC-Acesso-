@@ -26,8 +26,15 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nova Senha | Acesso+</title>
     <link rel="stylesheet" href="css/loginUser.css">
+    <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
+    <div class="acessibilidade-botoes acessibilidade-flutuante" aria-label="Controles de acessibilidade">
+        <button type="button" id="btn-leitor-voz" onclick="ligarLeitorVoz()" title="Leitor de Tela" class="btn-acessibilidade">🔊 Ouvir</button>
+        <button type="button" onclick="mudarFonte(1)" title="Aumentar Texto" class="btn-acessibilidade">A+</button>
+        <button type="button" onclick="mudarFonte(-1)" title="Diminuir Texto" class="btn-acessibilidade">A-</button>
+        <button type="button" onclick="alternarContraste()" title="Modo Escuro/Alto Contraste" class="btn-acessibilidade icone">◐</button>
+    </div>
     <section class="containerPai">
         <a href="loginUser.html" class="logo-card"><img src="img/logo.png" alt="Logo Acesso+"></a>
         <div class="card loginActive">
@@ -52,5 +59,19 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
             </div>
         </div>
     </section>
+
+    <!-- Widget oficial VLibras (Tradução em Libras - Gov.br) -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <script src="js/acessibilidade.js"></script>
 </body>
 </html>

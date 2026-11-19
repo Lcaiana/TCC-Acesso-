@@ -42,7 +42,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso+ | Meu Plano</title>
-    <link rel="stylesheet" href="css/areaUsuario.css">
+    <link rel="stylesheet" href="css/areaUsuario.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <?php include 'menuUsuario.php'; ?>
@@ -96,15 +96,19 @@
                 </div>
                 <div class="detalhe-linha">
                     <span>Forma de pagamento</span>
-                    <strong>Boleto — dia 10</strong>
-                </div>
-                <div class="detalhe-linha">
-                    <span>Início da vigência</span>
-                    <strong>10/03/2024</strong>
+                    <strong>Mercado Pago (Cartão, PIX ou Boleto)</strong>
                 </div>
                 <div class="detalhe-linha">
                     <span>Situação</span>
                     <span class="status <?php echo $statusClass; ?>"><?php echo htmlspecialchars($status); ?></span>
+                </div>
+
+                <div class="acao-plano-financeiro">
+                    <?php if (strtolower($status) !== 'ativo'): ?>
+                        <a href="financeiro.php" class="btn-regularizar-plano">Regularizar mensalidade agora</a>
+                    <?php else: ?>
+                        <a href="financeiro.php" class="btn-ver-faturas">Ver histórico de faturas &rarr;</a>
+                    <?php endif; ?>
                 </div>
             </section>
         </div>

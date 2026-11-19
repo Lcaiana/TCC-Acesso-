@@ -30,8 +30,8 @@
         if ($usuario['Status_Pagamento'] !== 'Ativo') {
             // BLOQUEIA O AGENDAMENTO!
             echo "<script>
-                    alert('AGENDAMENTO BLOQUEADO!\\n\\nIdentificamos que a mensalidade do seu plano está Pendente.\\nPor favor, regularize o pagamento para agendar consultas.');
-                    window.location.href = 'agendamentos.php';
+                    alert('AGENDAMENTO BLOQUEADO!\\n\\nIdentificamos que a mensalidade do seu plano está Pendente.\\nVocê será redirecionado para a área Financeira para regularizar o pagamento.');
+                    window.location.href = 'financeiro.php';
                   </script>";
             exit(); // Para o script na hora!
         }

@@ -121,7 +121,8 @@ nav {
     transition: 0.2s ease;
 }
 
-.btn-acessibilidade:hover {
+.btn-acessibilidade:hover,
+.btn-acessibilidade.ativo {
     background-color: #2668D7;
     color: #ffffff;
     border-color: #2668D7;

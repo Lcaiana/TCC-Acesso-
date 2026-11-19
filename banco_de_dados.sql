@@ -90,6 +90,19 @@ ALTER TABLE Cadastro_Users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE Cadastro_Profissionais ENABLE ROW LEVEL SECURITY;
 ALTER TABLE Consultas ENABLE ROW LEVEL SECURITY;
 
+-- 4. Criação da tabela de Faturas (Mensalidades e Pagamentos Mercado Pago)
+CREATE TABLE IF NOT EXISTS Faturas (
+    Id_Fatura INT AUTO_INCREMENT PRIMARY KEY,
+    Id_User INT NOT NULL,
+    Mes_Referencia VARCHAR(7) NOT NULL, -- Formato MM/AAAA (ex: 11/2026)
+    Valor DECIMAL(10,2) NOT NULL,
+    Data_Vencimento DATE NOT NULL,
+    Status_Fatura VARCHAR(50) DEFAULT 'Pendente', -- Pendente, Pago
+    Id_Pagamento_MP VARCHAR(100) NULL,
+    Data_Pagamento DATETIME NULL,
+    FOREIGN KEY (Id_User) REFERENCES Cadastro_Users(Id_User) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 -- Fim do Script
 -- --------------------------------------------------------

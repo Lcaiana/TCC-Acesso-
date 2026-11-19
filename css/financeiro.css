@@ -1,0 +1,222 @@
+/* ==========================================
+   ESTILOS DA ÁREA FINANCEIRA (financeiro.php)
+   ========================================== */
+
+.financeiro-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Alertas de retorno do Mercado Pago */
+.alerta-pagamento {
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+}
+
+.alerta-pagamento.sucesso {
+    background-color: #dcfce7;
+    color: #166534;
+    border-color: #86efac;
+}
+
+.alerta-pagamento.aviso {
+    background-color: #fef9c3;
+    color: #854d0e;
+    border-color: #fde047;
+}
+
+.alerta-pagamento.erro {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-color: #fca5a5;
+}
+
+/* Cards de resumo no topo */
+.resumo-financeiro {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.card-resumo {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.card-resumo .rotulo {
+    display: block;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+
+.card-resumo .valor-destaque {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+/* Lista de faturas */
+.box-faturas {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 26px 28px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.box-faturas h2 {
+    margin-bottom: 8px;
+    color: #0f172a;
+    font-size: 1.35rem;
+}
+
+.subtitulo-faturas {
+    color: #64748b;
+    font-size: 0.92rem;
+    margin-bottom: 22px;
+}
+
+.lista-faturas {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.fatura-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background-color: #f8fafc;
+    flex-wrap: wrap;
+}
+
+.fatura-info h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.05rem;
+    color: #0f172a;
+}
+
+.fatura-info p {
+    margin: 2px 0;
+    font-size: 0.88rem;
+    color: #475569;
+}
+
+.fatura-acoes {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.fatura-valor {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.btn-pagar-mp {
+    background-color: #009ee3;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 158, 227, 0.28);
+}
+
+.btn-pagar-mp:hover {
+    background-color: #007eb5;
+    transform: translateY(-2px);
+}
+
+.comprovante-pago {
+    font-size: 0.82rem;
+    color: #15803d;
+    font-weight: 600;
+}
+
+.empty-faturas {
+    text-align: center;
+    padding: 36px 20px;
+    color: #64748b;
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+}
+
+.rodape-painel {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #64748b;
+    font-size: 0.85rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* ==========================================
+   MODO ALTO CONTRASTE (ACESSIBILIDADE)
+   ========================================== */
+body.alto-contraste .card-resumo,
+body.alto-contraste .box-faturas,
+body.alto-contraste .fatura-item,
+body.alto-contraste .empty-faturas {
+    background-color: #1e1e1e !important;
+    border-color: #ffeb3b !important;
+    color: #ffffff !important;
+}
+
+body.alto-contraste .card-resumo .rotulo,
+body.alto-contraste .card-resumo .valor-destaque,
+body.alto-contraste .box-faturas h2,
+body.alto-contraste .subtitulo-faturas,
+body.alto-contraste .fatura-info h3,
+body.alto-contraste .fatura-info p,
+body.alto-contraste .fatura-valor,
+body.alto-contraste .comprovante-pago {
+    color: #ffffff !important;
+}
+
+body.alto-contraste .btn-pagar-mp {
+    background-color: #ffeb3b !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.alto-contraste .alerta-pagamento {
+    background-color: #1e1e1e !important;
+    color: #ffeb3b !important;
+    border: 2px solid #ffeb3b !important;
+}
+
+@media (max-width: 600px) {
+    .fatura-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fatura-acoes {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso+ | Planos</title>
     <link rel="stylesheet" href="css/planos.css">
+    <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
     <nav>
@@ -17,6 +18,14 @@
             <a href="planos.html" class="link-ativo">Planos</a>
             <a href="index.html#beneficios">Benefícios</a>
             <a href="#contato">Contato</a>
+        </div>
+
+        <!-- Botões de Acessibilidade -->
+        <div class="acessibilidade-botoes" aria-label="Controles de acessibilidade">
+            <button type="button" id="btn-leitor-voz" onclick="ligarLeitorVoz()" title="Leitor de Tela" class="btn-acessibilidade">🔊 Ouvir</button>
+            <button type="button" onclick="mudarFonte(1)" title="Aumentar Texto" class="btn-acessibilidade">A+</button>
+            <button type="button" onclick="mudarFonte(-1)" title="Diminuir Texto" class="btn-acessibilidade">A-</button>
+            <button type="button" onclick="alternarContraste()" title="Modo Escuro/Alto Contraste" class="btn-acessibilidade icone">◐</button>
         </div>
 
         <button class="btn-nav" onclick="irParaLogin()">Entrar</button>
@@ -127,7 +136,20 @@
         </div>
     </footer>
 
+    <!-- Widget oficial VLibras (Tradução em Libras - Gov.br) -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
     <script src="js/index.js"></script>
+    <script src="js/acessibilidade.js"></script>
     <script>
         const planos = document.querySelectorAll(".plano-card");
 

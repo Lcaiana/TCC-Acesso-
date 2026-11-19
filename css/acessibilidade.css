@@ -1,0 +1,193 @@
+/* ---------- Botões de Acessibilidade (Home, Planos e Telas Públicas) ---------- */
+
+.acessibilidade-botoes {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Versão flutuante para telas sem barra <nav> (Login, Escolha de Acesso, Recuperar Senha) */
+.acessibilidade-flutuante {
+    position: fixed;
+    top: 18px;
+    right: 20px;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.btn-acessibilidade {
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 14px;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-acessibilidade:hover,
+.btn-acessibilidade.ativo {
+    background-color: #2668D7;
+    color: #ffffff;
+    border-color: #2668D7;
+}
+
+.btn-acessibilidade.icone {
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* ---------- Modo Alto Contraste ---------- */
+
+body.alto-contraste {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+body.alto-contraste nav,
+body.alto-contraste header,
+body.alto-contraste .planos-header,
+body.alto-contraste .quick-access,
+body.alto-contraste .card-content,
+body.alto-contraste .plano-card,
+body.alto-contraste footer,
+body.alto-contraste .containerPai,
+body.alto-contraste .card,
+body.alto-contraste .acessibilidade-flutuante {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: #ffeb3b !important;
+}
+
+body.alto-contraste .plano-card.selecionado {
+    border: 2px solid #ffeb3b !important;
+    box-shadow: 0 0 0 2px rgba(255, 235, 59, 0.35) !important;
+}
+
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste h4,
+body.alto-contraste p,
+body.alto-contraste span,
+body.alto-contraste a,
+body.alto-contraste li,
+body.alto-contraste label {
+    color: #ffffff !important;
+}
+
+body.alto-contraste .hero-title .highlight,
+body.alto-contraste .preco,
+body.alto-contraste .esqueci-senha {
+    color: #ffeb3b !important;
+}
+
+body.alto-contraste .eyebrow {
+    background-color: #2a2a2a !important;
+    border-color: #ffeb3b !important;
+    color: #ffeb3b !important;
+}
+
+body.alto-contraste .divisor {
+    border-color: #444 !important;
+}
+
+body.alto-contraste .links-nav .link-ativo::after {
+    background-color: #ffeb3b !important;
+}
+
+body.alto-contraste .card::after {
+    background: #121212 !important;
+    border-left: 2px solid #ffeb3b !important;
+}
+
+body.alto-contraste .btn-nav,
+body.alto-contraste .btn-planos,
+body.alto-contraste .card form button,
+body.alto-contraste .loginButton,
+body.alto-contraste .cadastroButton {
+    background: #ffeb3b !important;
+    border: 2px solid #ffeb3b !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+}
+
+body.alto-contraste .btn-nav:hover,
+body.alto-contraste .btn-planos:hover,
+body.alto-contraste .card form button:hover,
+body.alto-contraste .loginButton:hover,
+body.alto-contraste .cadastroButton:hover {
+    background: #ffffff !important;
+    border: 2px solid #ffffff !important;
+    color: #000000 !important;
+}
+
+body.alto-contraste .card input,
+body.alto-contraste .card select,
+body.alto-contraste .card textarea {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border: 1px solid #ffeb3b !important;
+}
+
+body.alto-contraste .card input::placeholder {
+    color: #cbd5e1 !important;
+}
+
+body.alto-contraste .btn-acessibilidade {
+    background-color: #2a2a2a !important;
+    color: #ffeb3b !important;
+    border-color: #ffeb3b !important;
+}
+
+body.alto-contraste .btn-acessibilidade:hover,
+body.alto-contraste .btn-acessibilidade.ativo {
+    background-color: #ffeb3b !important;
+    color: #000000 !important;
+}
+
+body.alto-contraste .card-img,
+body.alto-contraste .qa-item img {
+    background-color: #ffffff !important;
+    border: 2px solid #ffeb3b !important;
+    border-radius: 14px;
+    padding: 8px;
+}
+
+/* ---------- Responsividade ---------- */
+
+@media (max-width: 900px) {
+    nav {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .acessibilidade-botoes:not(.acessibilidade-flutuante) {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .acessibilidade-flutuante {
+        top: 10px;
+        right: 10px;
+        padding: 4px 6px;
+        gap: 4px;
+    }
+
+    .acessibilidade-flutuante .btn-acessibilidade {
+        font-size: 12px;
+        padding: 4px 7px;
+    }
+}
